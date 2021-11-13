@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Creá tu Giftcard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form 
+    [formGroup]="giftcardForm"
+    (ngSubmit)="saveGiftcard()"
+  >
+    <ion-item id="inputName">
+      <ion-label 
+        position="stacked">
+        Título de la giftcard
+      </ion-label>
+      <ion-input 
+        minlength="3"
+        maxlength="30"
+        formControlName="name"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item id="inputDescription">
+      <ion-label position="stacked">
+        Descripción de la giftcard
+      </ion-label>
+      <ion-textarea
+        inputmode="text"
+        maxlength="255"
+        formControlName="description">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item id="inputName">
+      <ion-label position="stacked">
+        Tipo de Giftcard
+      </ion-label>
+      <ion-select interface="popover" formControlName="typeGiftcardId" placeholder="Seleccione una opción">
+        <ion-select-option value=1>Monto fíjo</ion-select-option>
+        <ion-select-option value=2>Servicio / Producto</ion-select-option>
+        <ion-select-option value=3>Descuento</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button 
+      class="ion-margin-top"
+      expand="block"
+      type="submit">
+      Guardar
+    </ion-button>
+    
+
+  </form>
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>giftcard-codes-list</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+
+  <ng-container *ngIf="giftcards?.length; else emptyTemplate">
+    <ion-list>
+      <ion-item 
+        [routerLink]="['code', 'detail', giftcard.id]"
+        *ngFor="let giftcard of giftcards">
+        <ion-label>
+          {{giftcard.name}}
+        </ion-label>
+      </ion-item>
+    </ion-list> 
+  </ng-container>
+
+
+  <ng-template #emptyTemplate>
+    <p>
+      No giftcards found.
+    </p>
+  </ng-template>
+
+  <ion-button 
+    expand="block" 
+    [routerLink]="['add']"
+  >
+    <ion-icon name="add"></ion-icon>
+    Add Giftcard
+  </ion-button>
+
+</ion-content>

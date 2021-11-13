@@ -4,6 +4,11 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'template',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
     loadChildren: () => import('./shared/shared.module').then( m => m.SharedModule)
   },
   {
@@ -14,7 +19,7 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'welcome',
     pathMatch: 'full'
-  }
+  },
 ];
 
 @NgModule({

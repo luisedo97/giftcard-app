@@ -13,6 +13,14 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+      },
+      {
+        path: '',
+        loadChildren: () => import('./views/giftcard/giftcard.module').then(m => m.GiftcardModule)
+      },
+      {
+        path: 'config',
+        loadChildren: () => import('./views/config/config.module').then(m => m.ConfigModule)
       }
     ]
   }
@@ -27,6 +35,8 @@ const routes: Routes = [
     CommonModule,
     IonicModule,
     RouterModule.forChild(routes)
+  ],
+  providers: [
   ]
 })
 export class FeaturesModule { }
