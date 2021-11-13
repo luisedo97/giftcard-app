@@ -15,16 +15,12 @@ export class StorageService {
   }
 
   async init() {
-    // If using, define drivers here: await this.storage.defineDriver(/*...*/);
     const storage = await this.storage.create();
     this._storage = storage;
     this.isInitialized = true;
     this.onInitialized.emit(true);
-    console.log('Storage initialized');
   }
 
-  // Create and expose methods that users of this service can
-  // call, for example:
   public async set(key: string, value: any) {
     await this._storage?.set(key, value);
   }

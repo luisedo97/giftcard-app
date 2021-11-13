@@ -25,4 +25,9 @@ export class GiftcardCodesListPage implements OnInit {
     console.log(this.giftcard);
   }
 
+  createCode(){
+    this._giftcardService.createCode(this.giftcard.id);
+    this.giftcard = this._giftcardService.getGiftcardById(this.giftcard.id);
+  }
+
 }

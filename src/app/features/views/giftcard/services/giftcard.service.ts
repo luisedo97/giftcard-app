@@ -16,8 +16,6 @@ export class GiftcardService {
     private _storageService: StorageService
   ) { 
 
-    console.log('Servicio de Giftcard creado');
-
     //Proceso para traer la informacion del Storage,
     //Apenas el Storage este creado
     if(this._storageService.isInitialized){
@@ -25,7 +23,6 @@ export class GiftcardService {
     }else{
       this.subscribeStorage = this._storageService.onInitialized.subscribe((initilized)=>{
         if(initilized){
-          console.log('Storage inicializado');
           this.getStorage();
           this.subscribeStorage.unsubscribe();
         }
@@ -33,23 +30,18 @@ export class GiftcardService {
     }
     //Fin del proceso
 
-
   }
 
   getStorage(){
     this._storageService.get('giftcards').then((giftcards)=>{
       if(giftcards){
-        console.log(this.giftcards);
         this.giftcards = giftcards;
-      }else{
-        console.log('No existe', giftcards);
       }
     });
   }
 
   saveStorage(){
     this._storageService.set('giftcards', this.giftcards).then(()=>{
-      console.log('Guardado');
       this.getStorage();
     });
   }
@@ -166,7 +158,7 @@ export class GiftcardService {
         }
       }        
     }while(exist);
-
+    
     giftcard.codes.push({
       id: giftcard.codes.length + 1,
       code: code,
