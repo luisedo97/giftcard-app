@@ -17,7 +17,7 @@ const routes: Routes = [
     loadChildren: () => import('./views/giftcard-codes-list/giftcard-codes-list.module').then( m => m.GiftcardCodesListPageModule)
   },
   {
-    path: 'template/code/detail/:codeId',
+    path: 'template/code/detail/:code',
     loadChildren: () => import('./views/giftcard-codes-details/giftcard-codes-details.module').then( m => m.GiftcardCodesDetailsPageModule)
   },
   {

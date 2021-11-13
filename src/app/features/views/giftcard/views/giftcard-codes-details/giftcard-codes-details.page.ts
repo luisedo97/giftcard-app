@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Giftcard } from 'src/app/features/interfaces/giftcard';
+import { Code } from 'src/app/features/interfaces/code';
 import { GiftcardService } from '../../services/giftcard.service';
 
 @Component({
@@ -10,19 +10,19 @@ import { GiftcardService } from '../../services/giftcard.service';
 })
 export class GiftcardCodesDetailsPage implements OnInit {
 
-  giftcard: Giftcard;
+  code: Code;
 
   constructor(
     private _giftcardService: GiftcardService,
     private _route: ActivatedRoute
   ) { 
     this._route.params.subscribe(params => {
-      this.giftcard = this._giftcardService.getGiftcardById(params['id']);
+      this.code = this._giftcardService.getCode(params['code']);
     });
   }
 
   ngOnInit() {
-    console.log(this.giftcard);
+    console.log(this.code);
   }
 
 }

@@ -4,14 +4,14 @@
       <ion-back-button
       ></ion-back-button>
     </ion-buttons>
-    <ion-title>{{giftcard?.name}}</ion-title>
+    <ion-title>{{code?.code}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let code of giftcard?.codes">
-      <ion-label>{{code.code}}</ion-label>
-    </ion-item>
-  </ion-list>
+  <qr-code 
+    [value]="code?.code"
+    size="300"
+  >
+  </qr-code>
 </ion-content>

@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { GiftcardCodesDetailsPageRoutingModule } from './giftcard-codes-details-routing.module';
 
 import { GiftcardCodesDetailsPage } from './giftcard-codes-details.page';
+import { QrCodeModule } from 'ng-qrcode';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GiftcardCodesDetailsPageRoutingModule
+    GiftcardCodesDetailsPageRoutingModule,
+    QrCodeModule
   ],
-  declarations: [GiftcardCodesDetailsPage]
+  declarations: [
+    GiftcardCodesDetailsPage
+  ]
 })
 export class GiftcardCodesDetailsPageModule {}
