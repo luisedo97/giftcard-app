@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { StorageService } from 'src/app/core/services/storage.service';
 import { Code } from 'src/app/features/interfaces/code';
 import { Giftcard } from 'src/app/features/interfaces/giftcard';
 
@@ -7,17 +9,56 @@ import { Giftcard } from 'src/app/features/interfaces/giftcard';
 })
 export class GiftcardService {
 
-  private giftcards: Giftcard[] = [];
+  public giftcards: Giftcard[] = [];
+  private subscribeStorage: Subscription;
 
-  constructor() { 
+  constructor(
+    private _storageService: StorageService
+  ) { 
+
     console.log('Servicio de Giftcard creado');
+
+    //Proceso para traer la informacion del Storage,
+    //Apenas el Storage este creado
+    if(this._storageService.isInitialized){
+      this.getStorage();
+    }else{
+      this.subscribeStorage = this._storageService.onInitialized.subscribe((initilized)=>{
+        if(initilized){
+          console.log('Storage inicializado');
+          this.getStorage();
+          this.subscribeStorage.unsubscribe();
+        }
+      });
+    }
+    //Fin del proceso
+
+
   }
 
-  /* Giftcard */
+  getStorage(){
+    this._storageService.get('giftcards').then((giftcards)=>{
+      if(giftcards){
+        console.log(this.giftcards);
+        this.giftcards = giftcards;
+      }else{
+        console.log('No existe', giftcards);
+      }
+    });
+  }
+
+  saveStorage(){
+    this._storageService.set('giftcards', this.giftcards).then(()=>{
+      console.log('Guardado');
+      this.getStorage();
+    });
+  }
+
   /**
    * @param giftcard | Parametros de una giftcard para anexar a la lista
    */
   saveGiftcard(giftcard: Giftcard){
+
     let options: Giftcard = {
       id: this.giftcards.length + 1,
       codes: [],
@@ -32,6 +73,7 @@ export class GiftcardService {
     }
 
     this.giftcards.push(giftcard);
+    this.saveStorage();
   }
 
 
@@ -46,6 +88,7 @@ export class GiftcardService {
         giftcardOld.description = giftcardNew.description;  
       }
     }
+    this.saveStorage();
   }
 
   /**
@@ -55,6 +98,7 @@ export class GiftcardService {
     this.giftcards = this.giftcards.filter((giftcard)=>{
       return giftcard.id != id;
     });
+    this.saveStorage();
   }
 
 
@@ -129,7 +173,7 @@ export class GiftcardService {
       used: false,
       giftcard_id: giftcard_id
     });
-
+    this.saveStorage();
   } 
 
   /**

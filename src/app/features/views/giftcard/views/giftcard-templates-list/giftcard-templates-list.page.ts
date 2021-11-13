@@ -9,12 +9,9 @@ import { GiftcardService } from '../../services/giftcard.service';
 })
 export class GiftcardTemplatesListPage implements OnInit {
 
-  giftcards: Giftcard[] = [];
-
   constructor(
-    private _giftcardService: GiftcardService
+    public giftcardService: GiftcardService
   ) {
-    this.giftcards = this._giftcardService.getGiftcards();
   }
 
   ngOnInit() {

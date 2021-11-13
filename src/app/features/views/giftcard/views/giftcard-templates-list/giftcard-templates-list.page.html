@@ -6,11 +6,11 @@
 
 <ion-content fullscreen>
 
-  <ng-container *ngIf="giftcards?.length; else emptyTemplate">
+  <ng-container *ngIf="giftcardService.giftcards?.length; else emptyTemplate">
     <ion-list>
       <ion-item 
-        [routerLink]="['code', 'detail', giftcard.id]"
-        *ngFor="let giftcard of giftcards">
+        [routerLink]="['code', giftcard.id]"
+        *ngFor="let giftcard of giftcardService.giftcards">
         <ion-label>
           {{giftcard.name}}
         </ion-label>
